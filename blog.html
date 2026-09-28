@@ -735,416 +735,57 @@ width: 17px !important; height: 20px !important;position: relative !important;ma
 </script>
 
 
-<style id="responsive-ui-patch">
-/* =========================================================
-   Responsive UI patch
-   Keeps the existing content/components intact and improves
-   layout behavior on desktop, tablet and mobile.
-   ========================================================= */
-html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
 
-*, *::before, *::after {
-  max-width: 100%;
-}
 
-img, svg, video, canvas {
-  max-width: 100%;
-  height: auto;
-}
+<style id="desktop-message-mobile-responsive">
+/* Desktop: keep the existing page/message exactly as authored. */
+@media (max-width: 767px) {
+  html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 100% !important; overflow-x: hidden !important; }
 
-button, input, select, textarea {
-  max-width: 100%;
-}
+  /* Hide the desktop navigation and all page content on mobile. */
+  citi-header, #maincontent, citi-footer { display: none !important; }
 
-.cbolui-cds {
-  overflow-x: hidden;
-}
-
-.citi-container {
-  width: 100%;
-  max-width: 1440px;
-  margin-inline: auto;
-  padding-left: clamp(16px, 3vw, 40px);
-  padding-right: clamp(16px, 3vw, 40px);
-}
-
-/* Prevent fixed-width Bootstrap-style rows from creating horizontal scroll. */
-.cbolui-cds .row {
-  --bs-gutter-x: 1.5rem;
-  margin-left: calc(var(--bs-gutter-x) * -.5);
-  margin-right: calc(var(--bs-gutter-x) * -.5);
-}
-
-.cbolui-cds [class*="col-"] {
-  min-width: 0;
-}
-
-/* Header / navigation */
-.primary-header,
-.primary-header > *,
-.navigationParent {
-  max-width: 100%;
-}
-
-.navigationParent {
-  overflow: visible;
-}
-
-@media (max-width: 1120px) {
-  .navigationParent {
-    min-height: 50px;
-    height: auto;
-  }
-
-  #navigationRight {
-    align-items: center;
-    min-width: 0;
-  }
-
-  #navigationRight .main-links {
-    min-height: 50px;
-  }
-
-  .nav-bar-main-ul {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-/* Hero sections */
-.heroReskinSection,
-.heroReskinSection .skel-container,
-.citi-panel-wrapper .content-panel,
-.citi-panel-wrapper .content-panel > * {
-  width: 100%;
-  max-width: 100%;
-}
-
-.reskin-image-container img,
-.reskin-image-container picture,
-.reskin-image-container source {
-  width: 100%;
-}
-
-@media (min-width: 992px) {
-  .heroReskinSection .skel-container {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .heroReskinSection .skel-container {
-    max-width: 1140px;
-  }
-}
-
-@media (min-width: 1400px) {
-  .heroReskinSection .skel-container {
-    max-width: 1320px;
-  }
-}
-
-/* Main content: allow flex/grid children to shrink instead of overflowing. */
-.citi-panel-wrapper,
-.flexContainer {
-  min-width: 0;
-}
-
-.citi-panel-wrapper > *,
-.flexContainer > * {
-  min-width: 0;
-}
-
-/* Cards / quick links */
-.quickLinks,
-.quickLinksListItem,
-.cds-column {
-  min-width: 0;
-}
-
-.quickLinksListItem {
-  overflow-wrap: anywhere;
-}
-
-.quickLinkText,
-.lob-text,
-.lob-text-full,
-.lob-text-short,
-.headline,
-.description,
-.reskin-copy {
-  overflow-wrap: anywhere;
-}
-
-/* Buttons become comfortably tappable without forcing overflow. */
-.cds-button,
-.btn,
-.primary-btn,
-.cds-button-primary,
-.cds-button-df {
-  min-height: 44px;
-  max-width: 100%;
-}
-
-@media (max-width: 767.98px) {
-  /* Global mobile spacing */
-  .citi-container {
-    padding-top: 20px;
-    padding-left: 16px;
-    padding-right: 16px;
-    min-height: 0;
-  }
-
-  /* Stack Bootstrap columns that otherwise remain side-by-side. */
-  .cbolui-cds .row {
-    margin-left: -8px;
-    margin-right: -8px;
-  }
-
-  .cbolui-cds .row > [class*="col-"] {
-    width: 100%;
-    max-width: 100%;
-    flex: 0 0 100%;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-
-  /* Hero typography */
-  .headline,
-  .header {
-    font-size: clamp(28px, 7vw, 40px) !important;
-    line-height: 1.15 !important;
-  }
-
-  .description,
-  .reskin-copy {
-    font-size: 16px !important;
-    line-height: 1.5 !important;
-  }
-
-  /* Hero/media: put image and copy into a predictable vertical flow. */
-  .heroReskinSection,
-  .heroReskinSection section,
-  .reskin-image-container {
-    min-height: 0 !important;
-  }
-
-  .reskin-image-container {
+  /* Show only the EXISTING desktop hero/message block on mobile. */
+  app-root, cbol-core, citi-parent-layout { display: block !important; width: 100% !important; min-height: 100vh !important; }
+  .heroReskinSection {
+    display: block !important;
+    min-height: 100vh !important;
     width: 100% !important;
-    order: 0;
+    background-image: none !important;
+    background-color: #fff !important;
   }
-
-  .reskin-copy {
+  .heroReskinSection > .container {
+    display: block !important;
     width: 100% !important;
-    order: 1;
-  }
-
-  /* Full-width CTAs on narrow screens. */
-  .cds-button,
-  .primary-btn,
-  .cds-button-primary,
-  .cds-button-df,
-  .btn.w-100 {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  /* Modal fits small phones. */
-  .citi-modal .modal-dialog,
-  .modal-dialog {
-    width: calc(100% - 20px) !important;
     max-width: none !important;
-    margin: 12px auto !important;
+    margin: 0 !important;
     padding: 0 !important;
   }
-
-  .modal-content {
-    max-height: calc(100vh - 24px);
-    overflow-y: auto;
-  }
-
-  .modal-header {
-    padding: 24px 20px 16px !important;
-  }
-
-  .modal-body {
-    padding: 0 20px !important;
-  }
-
-  .modal-footer {
-    padding: 24px 20px !important;
-  }
-
-  .citi-modal .modal-footer button,
-  .citi-modal .modal-footer a {
+  .heroReskinSection .hero-row,
+  .heroReskinSection .hero-row > .row {
+    display: block !important;
     width: 100% !important;
-    margin: 8px 0 0 !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
   }
-
-  /* Footer columns stack cleanly. */
-  .footer .row > [class*="col-"],
-  .sub-footer .row > [class*="col-"] {
+  .heroReskinSection .hero-row > .row > * {
+    display: none !important;
+  }
+  /* The existing message is the first/only content column in this hero. */
+  .heroReskinSection .hero-row > .row > .col-12 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
     width: 100% !important;
-    flex: 0 0 100% !important;
+    min-height: 100vh !important;
+    padding: 40px 20px !important;
+    text-align: center !important;
   }
-
-  /* Long legal/disclaimer copy stays readable. */
-  citi-footer-disclaimer .content,
-  citi-footer-disclaimer .text {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  citi-footer-disclaimer p {
-    font-size: 13px;
-    line-height: 1.55;
-  }
-
-  /* Prevent oversized decorative/branding elements from widening the viewport. */
-  .brandingSprite,
-  .coBranding,
-  .skelheaderssr,
-  .Skelnavbarssr {
-    max-width: 100%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .citi-container {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .headline,
-  .header {
-    font-size: clamp(32px, 5vw, 44px) !important;
-    line-height: 1.2 !important;
-  }
-
-  .description,
-  .reskin-copy {
-    font-size: 17px !important;
-    line-height: 1.5 !important;
-  }
-
-  .citi-modal .modal-dialog {
-    width: min(84%, 720px) !important;
-  }
-}
-
-@media (min-width: 992px) {
-  .citi-container {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-}
-
-/* Small-phone refinements */
-@media (max-width: 380px) {
-  .citi-container {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .headline,
-  .header {
-    font-size: 27px !important;
-  }
-
-  .description,
-  .reskin-copy {
-    font-size: 15px !important;
-  }
-
-  .modal-header,
-  .modal-body,
-  .modal-footer {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-}
-
-/* Accessibility / touch */
-@media (hover: none) and (pointer: coarse) {
-  a, button, input, select, textarea {
-    touch-action: manipulation;
-  }
-
-  a, button {
-    -webkit-tap-highlight-color: transparent;
-  }
-}
-</style>
-
-<style id="pc-mobile-compatible-fix">
-/* PC + MOBILE COMPATIBILITY FIX: keep original content/menu behavior */
-* { box-sizing: border-box; }
-html, body { width: 100%; max-width: 100%; margin: 0; padding: 0; overflow-x: hidden; }
-img, video, iframe { max-width: 100%; height: auto; }
-input, select, textarea, button { max-width: 100%; }
-
-@media (max-width: 767.98px) {
-  .primary-header, .navigationParent, citi-header, citi-navigation3,
-  .heroReskinSection, .citi-panel-wrapper, .citi-container {
-    width: 100% !important; max-width: 100% !important;
-  }
-  .navigationParent { height: auto !important; min-height: 0 !important; overflow: visible !important; }
-  .citi-container { padding-left: 16px !important; padding-right: 16px !important; }
-  .cbolui-cds .row { margin-left: -8px !important; margin-right: -8px !important; }
-  .cbolui-cds .row > [class*="col-"] { width: 100%; max-width: 100%; flex: 0 0 100%; padding-left: 8px; padding-right: 8px; min-width: 0; }
-  .heroReskinSection .skel-container { width: 100% !important; max-width: 100% !important; }
-  .heroReskinSection img, .reskin-image-container img { width: 100%; height: auto; }
-  .quickLinks, .quickLinksListItem, .cds-column, .flexContainer, .citi-panel-wrapper > * { min-width: 0 !important; max-width: 100%; }
-  .quickLinkText, .headline, .description, .reskin-copy, .lob-text, .lob-text-full, .lob-text-short { overflow-wrap: anywhere; word-break: normal; }
-  .cds-button, .btn, button, a[role="button"] { min-height: 44px; }
-}
-
-@media (min-width: 768px) and (max-width: 1199.98px) {
-  .citi-container { width: 100%; max-width: 960px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
-}
-
-@media (min-width: 1200px) {
-  .citi-container { width: 100%; max-width: 1320px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
-}
-</style>
-<style id="same-message-responsive">
-#same-message {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 32px 20px;
-  background: #fff;
-  color: #333;
-  text-align: center;
-  font-family: Arial, sans-serif;
-}
-#same-message .same-message-inner { max-width: 520px; margin: 0 auto; }
-#same-message h1 { margin: 0 0 12px; color: #002a54; font-size: 28px; line-height: 1.2; font-weight: 400; }
-#same-message p { margin: 0; color: #666; font-size: 17px; line-height: 1.5; }
-#same-message a { display: inline-flex; align-items: center; justify-content: center; margin-top: 24px; min-width: 150px; min-height: 48px; padding: 12px 24px; box-sizing: border-box; background: #056dae; color: #fff; text-decoration: none; font-size: 16px; font-weight: 600; line-height: 1.2; }
-#same-message a:hover, #same-message a:focus { background: #004f7c; color: #fff; }
-@media (max-width: 767px) {
-  html, body { margin: 0 !important; padding: 0 !important; width: 100%; min-height: 100%; }
-  body > *:not(#same-message) { display: none !important; }
-  #same-message { display: flex !important; position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; width: 100vw !important; height: 100vh !important; min-height: 100vh !important; align-items: center !important; justify-content: center !important; padding: 24px !important; }
-  #same-message .same-message-inner { width: min(100%, 520px); }
 }
 </style>
 </head>
 <body class="">
-<div id="same-message" role="status" aria-live="polite">
-  <div class="same-message-inner">
-    <h1>Navigation available on desktop</h1>
-    <p>Credit Cards, Banking, Lending, Investing, Wealth Management, Travel &amp; Benefits and Open an Account are shown on the desktop version.</p>
-    <a href="#" onclick="return false;">Continue</a>
-  </div>
-</div>
-
 <app-root ng-server-context="ssr" ng-version="21.2.21"><cbol-core><citi-parent-layout _nghost-ssr-c3213358437="" class="ng-tns-c3213358437-0"><div _ngcontent-ssr-c3213358437="" class="ng-tns-c3213358437-0 citi-outer-container cbolui-cds"><citi-header _ngcontent-ssr-c3213358437="" _nghost-ssr-c2855406740="" class="ng-tns-c3213358437-0"><a _ngcontent-ssr-c2855406740="" aria-live="assertive" class="alternateSkipNav" href="#/">Skip to Content</a><div _ngcontent-ssr-c2855406740="" class="header ng-star-inserted"><div _ngcontent-ssr-c2855406740="" class="primary-header"><citi-banner2 _ngcontent-ssr-c2855406740="" _nghost-ssr-c1590736564="" class="ng-star-inserted"><div _ngcontent-ssr-c1590736564="" class="banner ng-star-inserted" role="banner"><div _ngcontent-ssr-c1590736564="" class="content-wrap"><div _ngcontent-ssr-c1590736564="" class="journeyLogo"><div _ngcontent-ssr-c1590736564="" class="logoDiv default ng-star-inserted" id="logoDiv"><a _ngcontent-ssr-c1590736564="" aria-label="citi-Home" class="ng-star-inserted" href="#/" id="sessionFocusUrl" tabindex="0"><!-- --><!-- --><img _ngcontent-ssr-c1590736564="" alt="Citi" class="ng-star-inserted" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/citiredesign.svg"/><!-- --></a><!-- --></div><!-- --><!-- --><!-- --><div _ngcontent-ssr-c1590736564="" class="ng-star-inserted" id="fdicDiv"><a _ngcontent-ssr-c1590736564="" id="fdicFocusUrl" role="presentation" tabindex="0"><!-- --><img _ngcontent-ssr-c1590736564="" alt="Citi FDIC Insured" class="ng-star-inserted" id="fdicLogoA" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Banner_v2.svg"/><!-- --></a></div><!-- --></div><!-- --><div _ngcontent-ssr-c1590736564="" class="buttons ng-star-inserted"><div _ngcontent-ssr-c1590736564="" class="navButton ng-star-inserted" id="butlerATM"><a _ngcontent-ssr-c1590736564="" class="ng-star-inserted" href="#/citibank-location-finder" id="atmLink"><img _ngcontent-ssr-c1590736564="" alt="" aria-hidden="true" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Banner_v2.svg"/><span _ngcontent-ssr-c1590736564="">ATM / BRANCH</span></a><!-- --><!-- --><!-- --><!-- --></div><!-- --><!-- --><div _ngcontent-ssr-c1590736564="" class="navButton ng-star-inserted" id="lang"><!-- --><!-- --><!-- --><button _ngcontent-ssr-c1590736564="" aria-label="Haz clic para cambiar la página al español" class="ng-star-inserted" data-target="#citi-modalb2" id="langBtn" lang="es"><img _ngcontent-ssr-c1590736564="" alt="" aria-hidden="true" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Banner_v2.svg"/><span _ngcontent-ssr-c1590736564="" lang="es">ESPAÑOL</span></button><!-- --></div><!-- --><!-- --></div><!-- --></div></div><!-- --></citi-banner2><!-- --><!-- --><citi-navigation3 _ngcontent-ssr-c2855406740="" _nghost-ssr-c739218679="" class="citi-navigation"><div _ngcontent-ssr-c739218679="" aria-label="Main" class="navigationParent blueTopNavTheme preLogin ng-star-inserted" role="navigation"><div _ngcontent-ssr-c739218679="" id="navigationLeft"><!-- --><ul _ngcontent-ssr-c739218679="" class="nav-bar-main-ul" style="display: flex; position: static;"><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="navcreditCardMainLI" role="listitem"><!-- --><a _ngcontent-ssr-c739218679="" aria-expanded="false" class="main-links mobileRightChevron topNavTabs ng-star-inserted" id="navcreditCardmainAnchor0" role="button" tabindex="0">Credit Cards</a><!-- --><!-- --><!-- --><div _ngcontent-ssr-c739218679="" class="subMenuMainContainer ng-star-inserted"><div _ngcontent-ssr-c739218679="" class="subMenuGroupParent topNavDropdown ng-star-inserted" id="navcreditCardsubGroup0"><div _ngcontent-ssr-c739218679="" class="flexContainer"><!-- --><!-- --><child-nav-group3 _ngcontent-ssr-c739218679="" _nghost-ssr-c3004274504="" class="child-nav-group3 childNavGroup ng-star-inserted" style="display: flex;"><!-- --><ul _ngcontent-ssr-c3004274504="" class="subMenuGroupUL ng-star-inserted" role="list"><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links nav-link-bold ng-star-inserted" href="#/credit-cards/?intc=citihpmenu~creditcards~explore" id="navExpCardsExplore Cardsundefined0" role="link" tabindex="0">Explore Cards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links nav-link-bold nav-item-border ng-star-inserted" href="#/cards/pre-qualify?OC=CC-CITI-3D5&amp;intc=citihpmenu_creditcards_pq" id="navPreQualSee If You’re Pre-Qualifiedundefined1" role="link" tabindex="0">See If You’re Pre-Qualified</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/credit-cards/rewards-credit-cards?intc=citihpmenu~creditcards~rewards" id="navRewCredRewards Cardsundefined2" role="link" tabindex="0">Rewards Cards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/credit-cards/travel-reward-credit-cards?intc=citihpmenu~creditcards~travel" id="navTravelCredsTravel Cardsundefined3" role="link" tabindex="0">Travel Cards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/credit-cards/balance-transfer-credit-cards?intc=citihpmenu~creditcards~bt" id="navBalTransBalance Transfer Cardsundefined4" role="link" tabindex="0">Balance Transfer Cards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/credit-cards/savings-and-cash-back-credit-cards?intc=citihpmenu~creditcards~cash" id="navCashBackCreCash Back Cardsundefined5" role="link" tabindex="0">Cash Back Cards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/credit-cards/retail-store-credit-cards?intc=citihpmenu~creditcards~crs" id="navRetailStoreCardsRetail Store Cardsundefined6" role="link" tabindex="0">Retail Store Cards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/credit-cards/no-annual-fee-credit-cards?intc=citihpmenu~creditcards~noannual" id="navAnnualFeeNo Annual Fee Cardsundefined7" role="link" tabindex="0">No Annual Fee Cards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/credit-cards/view-all-credit-cards?intc=citihpmenu~creditcards~vac" id="navViewCrdsView All Cardsundefined8" role="link" tabindex="0">View All Cards</a><!-- --><!-- --></li><!-- --><!-- --></ul><!-- --><!-- --><div _ngcontent-ssr-c3004274504="" class="quickLinks ng-star-inserted"><div _ngcontent-ssr-c3004274504="" class="quickLinksSubTitle"><div aria-level="2" role="heading">Quick Links</div></div><ul _ngcontent-ssr-c3004274504=""><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Citi&lt;sup id='reg' aria-hidden='true'&gt;&amp;reg;&lt;/sup&gt; Credit Knowledge Center" aria-hidden="true" class="ktCenter" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/credit-cards/knowledge-center" id="ktCenter">Citi<sup aria-hidden="true">®</sup> Credit Knowledge Center</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Respond to Mail Offer" aria-hidden="true" class="mailOffer" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/cards/invitation" id="mailOffer">Respond to Mail Offer</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Check Your Application" aria-hidden="true" class="checkYourApp" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/cards/app-status" id="checkYourApp">Check Your Application</a><!-- --></li><!-- --></ul></div><!-- --></child-nav-group3><!-- --></div><!-- --></div><!-- --></div><!-- --></li><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="navbankingMainLI" role="listitem"><!-- --><a _ngcontent-ssr-c739218679="" aria-expanded="false" class="main-links mobileRightChevron topNavTabs ng-star-inserted" id="navbankingmainAnchor1" role="button" tabindex="0">Banking</a><!-- --><!-- --><!-- --><div _ngcontent-ssr-c739218679="" class="subMenuMainContainer ng-star-inserted"><div _ngcontent-ssr-c739218679="" class="subMenuGroupParent topNavDropdown ng-star-inserted" id="navbankingsubGroup1"><div _ngcontent-ssr-c739218679="" class="flexContainer"><!-- --><!-- --><child-nav-group3 _ngcontent-ssr-c739218679="" _nghost-ssr-c3004274504="" class="child-nav-group3 childNavGroup ng-star-inserted" style="display: flex;"><!-- --><ul _ngcontent-ssr-c3004274504="" class="subMenuGroupUL ng-star-inserted" role="list"><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#?intc=citihpmenu_overview_banking" id="navbnkOvrBanking Overviewundefined0" role="link" tabindex="0">Banking Overview</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/banking/checking-account?intc=citihpmenu_overview_checking" id="navchkinCheckingundefined1" role="link" tabindex="0">Checking</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/banking/savings-account?intc=citihpmenu_overview_savings" id="navsavinSavingsundefined2" role="link" tabindex="0">Savings</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/banking/cd-account?intc=citihpmenu_overview_CD" id="navCertificatesDepositCertificates of Depositundefined3" role="link" tabindex="0">Certificates of Deposit</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/banking/current-interest-rates/savings-accounts?intc=citihpmenu_overview_rates" id="navRatesRatesundefined4" role="link" tabindex="0">Rates</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/small-business/banking?intc=citihpmenu_overview_smallbusiness" id="navSmlBusBankSmall Business Bankingundefined5" role="link" tabindex="0">Small Business Banking</a><!-- --><!-- --></li><!-- --><!-- --></ul><!-- --><!-- --><div _ngcontent-ssr-c3004274504="" class="quickLinks ng-star-inserted"><div _ngcontent-ssr-c3004274504="" class="quickLinksSubTitle"><div aria-level="2" role="heading">Quick Links</div></div><ul _ngcontent-ssr-c3004274504=""><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Personal Banking Guide" aria-hidden="true" class="personalBankingGuide" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/banking/personal-banking-guide" id="personalBankingGuide">Personal Banking Guide</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Small Business Guide" aria-hidden="true" class="citismallbisguide" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/109-smallbguide.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/banking/small-business-guide" id="citismallbisguide">Small Business Guide</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Citi&lt;sup id='reg'&gt;&amp;reg;&lt;/sup&gt; Bonus Offers" aria-hidden="true" class="citiBonusOffers" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/banking/special-offers?intc=citihpmenu_overview_special-offers" id="citiBonusOffers">Citi<sup>®</sup> Bonus Offers</a><!-- --></li><!-- --></ul></div><!-- --></child-nav-group3><!-- --></div><!-- --></div><!-- --></div><!-- --></li><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="navlendingMainLI" role="listitem"><!-- --><a _ngcontent-ssr-c739218679="" aria-expanded="false" class="main-links mobileRightChevron topNavTabs ng-star-inserted" id="navlendingmainAnchor2" role="button" tabindex="0">Lending</a><!-- --><!-- --><!-- --><div _ngcontent-ssr-c739218679="" class="subMenuMainContainer ng-star-inserted"><div _ngcontent-ssr-c739218679="" class="subMenuGroupParent topNavDropdown ng-star-inserted" id="navlendingsubGroup2"><div _ngcontent-ssr-c739218679="" class="flexContainer"><!-- --><!-- --><child-nav-group3 _ngcontent-ssr-c739218679="" _nghost-ssr-c3004274504="" class="child-nav-group3 childNavGroup ng-star-inserted" style="display: flex;"><!-- --><ul _ngcontent-ssr-c3004274504="" class="subMenuGroupUL ng-star-inserted" role="list"><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/personal-loans?affcode=CLN&amp;intc=pil_borrow_globalnav_prelogin" id="navPerLoanCredPersonal Loansundefined0" role="link" tabindex="0">Personal Loans</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/online-services/checking-plus" id="navOverdraftLineCreditOverdraft Line of Creditundefined1" role="link" tabindex="0">Overdraft Line of Credit</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/mortgage/home-mortgage" id="navHomeLendingHome Lendingundefined2" role="link" tabindex="0">Home Lending</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/mortgage/buying-a-home" id="navBuyaHomeBuy a Homeundefined3" role="link" tabindex="0">Buy a Home</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/mortgage/refinancing-your-home" id="navRefYourHomeRefinance Your Homeundefined4" role="link" tabindex="0">Refinance Your Home</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/home-equity/line-of-credit" id="navHmEqtUse Your Home Equityundefined5" role="link" tabindex="0">Use Your Home Equity</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/small-business/loans?intc=citihpmenu_lending_smallbusiness" id="navSmlBusLendSmall Business Lendingundefined6" role="link" tabindex="0">Small Business Lending</a><!-- --><!-- --></li><!-- --><!-- --></ul><!-- --><!-- --><div _ngcontent-ssr-c3004274504="" class="quickLinks ng-star-inserted"><div _ngcontent-ssr-c3004274504="" class="quickLinksSubTitle"><div aria-level="2" role="heading">Quick Links</div></div><ul _ngcontent-ssr-c3004274504=""><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Mortgage Calculators" aria-hidden="true" class="mortCalc" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/mortgage/refinance-and-mortgage-calculators" id="mortCalc">Mortgage Calculators</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Home Equity Calculators" aria-hidden="true" class="hec" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/home-equity/calculators" id="hec">Home Equity Calculators</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Mortgage Learning Center" aria-hidden="true" class="mlc" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/mortgage/learning-center" id="mlc">Mortgage Learning Center</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Personal Loans Center" aria-hidden="true" class="plc" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/personal-loans/learning-center" id="plc">Personal Loans Center</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Debt Consolidation Calculator" aria-hidden="true" class="dcc" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/personal-loans/debt-consolidation-calculator" id="dcc">Debt Consolidation Calculator</a><!-- --></li><!-- --></ul></div><!-- --></child-nav-group3><!-- --></div><!-- --></div><!-- --></div><!-- --></li><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="investingMainLI" role="listitem"><!-- --><a _ngcontent-ssr-c739218679="" aria-expanded="false" class="main-links mobileRightChevron topNavTabs ng-star-inserted" id="investingmainAnchor3" role="button" tabindex="0">Investing</a><!-- --><!-- --><!-- --><div _ngcontent-ssr-c739218679="" class="subMenuMainContainer ng-star-inserted"><div _ngcontent-ssr-c739218679="" class="subMenuGroupParent topNavDropdown ng-star-inserted" id="investingsubGroup3"><div _ngcontent-ssr-c739218679="" class="flexContainer"><!-- --><!-- --><child-nav-group3 _ngcontent-ssr-c739218679="" _nghost-ssr-c3004274504="" class="child-nav-group3 childNavGroup ng-star-inserted" style="display: flex;"><!-- --><ul _ngcontent-ssr-c3004274504="" class="subMenuGroupUL ng-star-inserted" role="list"><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/investing/investingwithciti" id="navInvstInvesting Overviewundefined0" role="link" tabindex="0">Investing Overview</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/citi-self-invest" id="navSelfDirectedTradSelf-Directed Investingundefined1" role="link" tabindex="0">Self-Directed Investing</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/cwb?entry=topnav" id="navCitiWealthBuildGuided Investingundefined2" role="link" tabindex="0">Guided Investing</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/mgp/cwamarketing" id="navWrkWithAdvsWorking with an Advisorundefined3" role="link" tabindex="0">Working with an Advisor</a><!-- --><!-- --></li><!-- --><!-- --></ul><!-- --><!-- --><div _ngcontent-ssr-c3004274504="" class="quickLinks ng-star-inserted"><div _ngcontent-ssr-c3004274504="" class="quickLinksSubTitle"><div aria-level="2" role="heading">Quick Links</div></div><ul _ngcontent-ssr-c3004274504=""><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Planning Tools" aria-hidden="true" class="finPlan" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/invest/financial-planning-tools/home" id="finPlan">Planning Tools</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Market Insights" aria-hidden="true" class="marketIns" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="https://marketinsights.citi.com/" id="marketIns">Market Insights</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Investments &amp; Insurance" aria-hidden="true" class="invIns" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/invest/products-and-services" id="invIns">Investments &amp; Insurance</a><!-- --></li><!-- --></ul></div><!-- --></child-nav-group3><!-- --></div><!-- --></div><!-- --></div><!-- --></li><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="wealthMgmntMainLI" role="listitem"><!-- --><a _ngcontent-ssr-c739218679="" aria-expanded="false" class="main-links mobileRightChevron topNavTabs ng-star-inserted" id="wealthMgmntmainAnchor4" role="button" tabindex="0">Wealth Management</a><!-- --><!-- --><!-- --><div _ngcontent-ssr-c739218679="" class="subMenuMainContainer ng-star-inserted"><div _ngcontent-ssr-c739218679="" class="subMenuGroupParent topNavDropdown ng-star-inserted" id="wealthMgmntsubGroup4"><div _ngcontent-ssr-c739218679="" class="flexContainer"><!-- --><!-- --><child-nav-group3 _ngcontent-ssr-c739218679="" _nghost-ssr-c3004274504="" class="child-nav-group3 childNavGroup ng-star-inserted" style="display: flex;"><!-- --><ul _ngcontent-ssr-c3004274504="" class="subMenuGroupUL ng-star-inserted" role="list"><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/banking/citigold?intc=citihpmenu_overview_citigold" id="navCitGoldCitigoldundefined0" role="link" tabindex="0">Citigold</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/banking/citigold-private-client?intc=citihpmenu_overview_citigold-private-client" id="navCitiGoldPrivCliCitigold&lt;sup&gt;&amp;reg;&lt;/sup&gt; Private Clientundefined1" role="link" tabindex="0">Citigold<sup>®</sup> Private Client</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/banking/citi-priority?intc=citihpmenu_overview_citi-priority" id="navCitiPriorityCiti Priorityundefined2" role="link" tabindex="0">Citi Priority</a><!-- --><!-- --></li><!-- --><!-- --></ul><!-- --><!-- --><div _ngcontent-ssr-c3004274504="" class="quickLinks ng-star-inserted"><div _ngcontent-ssr-c3004274504="" class="quickLinksSubTitle"><div aria-level="2" role="heading">Quick Links</div></div><ul _ngcontent-ssr-c3004274504=""><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Find a Wealth Team" aria-hidden="true" class="findRelMan" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="https://contactcitigold.citi.com/" id="findRelMan">Find a Wealth Team</a><!-- --></li><li _ngcontent-ssr-c3004274504="" class="quickLinksListItem ng-star-inserted"><img _ngcontent-ssr-c3004274504="" alt="Planning Tools" aria-hidden="true" class="citiWelAdv" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/Citi_Icon_Sprite_Nav_v3.svg"/><a _ngcontent-ssr-c3004274504="" class="quickLinkText ng-star-inserted" href="#/invest/financial-planning-tools/home" id="citiWelAdv">Planning Tools</a><!-- --></li><!-- --></ul></div><!-- --></child-nav-group3><!-- --></div><!-- --></div><!-- --></div><!-- --></li><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="travelAndBenefitsMainLI" role="listitem"><!-- --><a _ngcontent-ssr-c739218679="" aria-expanded="false" class="main-links mobileRightChevron topNavTabs ng-star-inserted" id="travelAndBenefitsmainAnchor5" role="button" tabindex="0">Travel &amp; Benefits</a><!-- --><!-- --><!-- --><div _ngcontent-ssr-c739218679="" class="subMenuMainContainer ng-star-inserted"><div _ngcontent-ssr-c739218679="" class="subMenuGroupParent topNavDropdown ng-star-inserted" id="travelAndBenefitssubGroup5"><div _ngcontent-ssr-c739218679="" class="flexContainer"><!-- --><!-- --><child-nav-group3 _ngcontent-ssr-c739218679="" _nghost-ssr-c3004274504="" class="child-nav-group3 childNavGroup ng-star-inserted" style="display: flex;"><!-- --><ul _ngcontent-ssr-c3004274504="" class="subMenuGroupUL ng-star-inserted" role="list"><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="#/citi-partner/cititravel/login" id="citiTravelCiti Travel&lt;sup&gt;&amp;reg;&lt;/sup&gt;undefined0" role="link" tabindex="0">Citi Travel<sup>®</sup></a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="https://www.thankyou.com/cms/thankyou/" id="citiThankYouRewardsCiti ThankYou&lt;sup&gt;&amp;reg;&lt;/sup&gt; Rewardsundefined1" role="link" tabindex="0">Citi ThankYou<sup>®</sup> Rewards</a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="https://www.citientertainment.com/" id="citiEntertainmentCiti Entertainment&lt;sup&gt;&amp;reg;&lt;/sup&gt;undefined2" role="link" tabindex="0">Citi Entertainment<sup>®</sup></a><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c3004274504="" class="subMenuGroupLI ng-star-inserted" role="listitem"><a _ngcontent-ssr-c3004274504="" class="child-links ng-star-inserted" href="https://www.cardbenefits.citi.com/" id="cardBenefitsCard Benefitsundefined3" role="link" tabindex="0">Card Benefits</a><!-- --><!-- --></li><!-- --><!-- --></ul><!-- --><!-- --><div _ngcontent-ssr-c3004274504="" class="quickLinks ng-star-inserted"><div _ngcontent-ssr-c3004274504="" class="quickLinksSubTitle"></div><ul _ngcontent-ssr-c3004274504=""><!-- --></ul></div><!-- --></child-nav-group3><!-- --></div><!-- --></div><!-- --></div><!-- --></li><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="butlerATMMainLI" role="listitem"><!-- --><!-- --><a _ngcontent-ssr-c739218679="" class="main-links mobileRightChevron topNavButton ng-star-inserted" href="#/citibank-location-finder" id="butlerATMmainAnchor6">ATM / BRANCH</a><!-- --><!-- --><!-- --></li><!-- --><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="butlerEspanolMainLI" role="listitem"><!-- --><!-- --><!-- --><!-- --><!-- --></li><!-- --><li _ngcontent-ssr-c739218679="" class="mainListItem ng-star-inserted" id="navOpenAccMainLI" role="listitem"><!-- --><!-- --><a _ngcontent-ssr-c739218679="" class="main-links mobileRightChevron topNavButton ng-star-inserted" href="#" id="navOpenAccmainAnchor9">Open an Account</a><!-- --><!-- --><!-- --></li><!-- --><!-- --></ul></div><div _ngcontent-ssr-c739218679="" id="navigationRight"><button _ngcontent-ssr-c739218679="" class="main-links topNavButton howCanWeHelpButton en_US ng-star-inserted" name="how can we help button" type="button"> How can we help? </button><!-- --><!-- --><!-- --><!-- --></div></div><!-- --><citi-nav-search _ngcontent-ssr-c739218679="" _nghost-ssr-c3870765007=""><!-- --></citi-nav-search></citi-navigation3><!-- --></div></div><!-- --><!-- --></citi-header><div _ngcontent-ssr-c3213358437="" class="ng-tns-c3213358437-0" id="maincontent"><div _ngcontent-ssr-c3213358437="" class="ng-tns-c3213358437-0"><!-- --><div _ngcontent-ssr-c3213358437="" class="ng-tns-c3213358437-0 citi-container cbolui-ddl theme-light fullbleedFix"><!-- --><div _ngcontent-ssr-c3213358437="" class="appbody ng-tns-c3213358437-0 ng-star-inserted"><router-outlet class="ng-tns-c3213358437-0"></router-outlet><app-landingpage _nghost-ssr-c133644012="" class="ng-tns-c3213358437-0 ng-star-inserted"><div _ngcontent-ssr-c133644012="" role="main"><citi-simple-layout _ngcontent-ssr-c133644012="" pageid="ag_homePage"><!-- --><div _ngcontent-ssr-c133644012="" class="container-fluid" id="clearUserIdAlert" style="display: none;"><cds-banner-alert _ngcontent-ssr-c133644012="" _nghost-ssr-c1207676835="" announceclosemessage="Clear User ID Alert closed" banneralertbgcolor="#fff" banneralerttype="success" class="cds-banner-alert success-alert" id="clearUser-alert-id" idstr="clearUser-alert-id" role="alert" style="background-color: rgb(255, 255, 255); display: block;"><div _ngcontent-ssr-c133644012="" class="contentParentWrap"><div _ngcontent-ssr-c133644012="" class="contentWrap"><cds-icon _ngcontent-ssr-c133644012="" _nghost-ssr-c4105219706="" alttext="Signoff Alert Section" arialabel="icon" class="cds-icon reskin-cds-icon" idstr="cds-icon-id1" name="05-check" shade="dark" size="medium"><div _ngcontent-ssr-c4105219706="" alt="Signoff Alert Section" aria-label="icon" class="sfi b1-05-check-hover medium-circle" id="cds-icon-id1" role="img" style="background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Ctitle%3E05-check-b1-hover%3C/title%3E%3Cpath d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm6.7,7.71-8.1,7.86A1.53,1.53,0,0,1,9.54,17a1.51,1.51,0,0,1-1-.42L5.3,13.48A1,1,0,0,1,6.7,12L9.54,14.8,17.3,7.28a1,1,0,1,1,1.4,1.43Z' transform='translate(-1 -1)' style='fill:%23002a54'/%3E%3C/svg%3E&quot;);"></div></cds-icon><p _ngcontent-ssr-c133644012="" class="content reskin-alert-signoff">You've successfully cleared the User ID !</p></div><div _ngcontent-ssr-c133644012="" class="closeBtnWrap"><button _ngcontent-ssr-c133644012="" aria-label="Close" class="cds-close" type="button"></button></div></div></cds-banner-alert></div><!-- --><!-- --><div _ngcontent-ssr-c133644012="" class="alertContainer ng-star-inserted"><div _ngcontent-ssr-c133644012="" class="container-fluid alertSection"><citi-alerts _ngcontent-ssr-c133644012="" _nghost-ssr-c1769057921="" class="ng-star-inserted"><cds-row _ngcontent-ssr-c1769057921=""><div class="row"><cds-column _ngcontent-ssr-c1769057921="" class="cds-column col-12" xs="12"><!-- --></cds-column></div></cds-row><!-- --></citi-alerts><!-- --></div></div><!-- --><app-hero-reskin _ngcontent-ssr-c133644012="" _nghost-ssr-c2067562431=""><div _ngcontent-ssr-c2067562431="" class="heroReskinSection" style='background-image: url("./cbol-hp-static-assets/assets/img/Citi-futuristic-angles-bg-compressed.jpg");'><div _ngcontent-ssr-c2067562431="" class="container" data-id="mpc_citicom_may2016" id="mpc_citicom_may2016"><div _ngcontent-ssr-c2067562431="" aria-hidden="true" class="seo-hidden ng-star-inserted"><h1 _ngcontent-ssr-c2067562431=""> Citi</h1></div><!-- --><!-- --><cds-row _ngcontent-ssr-c2067562431="" class="hero-row">
 <div class="row" style="width:100%;">
   <div class="col-12" style="width:100%; text-align:center; padding:60px 20px;">
