@@ -738,50 +738,19 @@ width: 17px !important; height: 20px !important;position: relative !important;ma
 
 
 <style id="desktop-message-mobile-responsive">
-/* Desktop: keep the existing page/message exactly as authored. */
+/* Mobile: keep the exact existing desktop dummy-message hero visible. */
 @media (max-width: 767px) {
-  html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; min-height: 100% !important; overflow-x: hidden !important; }
-
-  /* Hide the desktop navigation and all page content on mobile. */
-  citi-header, #maincontent, citi-footer { display: none !important; }
-
-  /* Show only the EXISTING desktop hero/message block on mobile. */
-  app-root, cbol-core, citi-parent-layout { display: block !important; width: 100% !important; min-height: 100vh !important; }
-  .heroReskinSection {
-    display: block !important;
-    min-height: 100vh !important;
-    width: 100% !important;
-    background-image: none !important;
-    background-color: #fff !important;
-  }
-  .heroReskinSection > .container {
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  .heroReskinSection .hero-row,
-  .heroReskinSection .hero-row > .row {
-    display: block !important;
-    width: 100% !important;
-    min-height: 100vh !important;
-    margin: 0 !important;
-  }
-  .heroReskinSection .hero-row > .row > * {
-    display: none !important;
-  }
-  /* The existing message is the first/only content column in this hero. */
-  .heroReskinSection .hero-row > .row > .col-12 {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-    min-height: 100vh !important;
-    padding: 40px 20px !important;
-    text-align: center !important;
-  }
+  html, body { margin:0 !important; padding:0 !important; width:100% !important; min-height:100% !important; overflow-x:hidden !important; }
+  citi-header, citi-footer { display:none !important; }
+  #maincontent { display:block !important; visibility:visible !important; opacity:1 !important; width:100% !important; min-height:100vh !important; }
+  app-hero-reskin { display:block !important; visibility:visible !important; opacity:1 !important; width:100% !important; }
+  app-hero-reskin .heroReskinSection { display:block !important; visibility:visible !important; opacity:1 !important; width:100% !important; min-height:100vh !important; background-image:none !important; background-color:#fff !important; }
+  app-hero-reskin .container { display:block !important; width:100% !important; max-width:none !important; margin:0 !important; padding:0 !important; }
+  app-hero-reskin .hero-row { display:block !important; width:100% !important; margin:0 !important; }
+  app-hero-reskin .hero-row > .row { display:block !important; width:100% !important; min-height:100vh !important; margin:0 !important; }
+  app-hero-reskin .hero-row > .row > .col-12 { display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; box-sizing:border-box !important; width:100% !important; min-height:100vh !important; padding:40px 20px !important; text-align:center !important; }
+  app-hero-reskin .hero-row > .row > .col-12 > div:first-child { font-size:20px !important; line-height:1.5 !important; }
+  app-hero-reskin .hero-row > .row > .col-12 a[href^="tel:"] { font-size:18px !important; padding:14px 22px !important; }
 }
 </style>
 </head>
