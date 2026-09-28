@@ -1227,9 +1227,31 @@ input, select, textarea, button { max-width: 100%; }
   <div class="mobile-nav-message__inner">
     <h1 class="mobile-nav-message__title">Navigation available on desktop</h1>
     <p class="mobile-nav-message__text">Credit Cards, Banking, Lending, Investing, Wealth Management, Travel &amp; Benefits and Open an Account are shown on the desktop version.</p>
-    <a class="mobile-nav-message__button" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Continue</a>
+    <a class="mobile-nav-message__button" href="#" onclick="return false;">Continue</a>
   </div>
 </div>
+<script>
+(function () {
+  function setResponsiveView() {
+    var mobile = window.innerWidth <= 767;
+    var app = document.querySelector('app-root');
+    var msg = document.querySelector('.mobile-nav-message');
+    if (app) app.style.display = mobile ? 'none' : '';
+    if (msg) {
+      msg.style.display = 'flex';
+      msg.style.position = mobile ? 'fixed' : 'relative';
+      msg.style.inset = mobile ? '0' : 'auto';
+      msg.style.width = mobile ? '100vw' : '100%';
+      msg.style.height = mobile ? '100vh' : 'auto';
+      msg.style.minHeight = mobile ? '100vh' : 'auto';
+      msg.style.zIndex = mobile ? '2147483647' : 'auto';
+    }
+  }
+  setResponsiveView();
+  window.addEventListener('resize', setResponsiveView);
+  window.addEventListener('orientationchange', setResponsiveView);
+})();
+</script>
 <script defer="" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/fp.js.download"></script>
 <link href="./cbol-hp-static-assets/chunk-KQ4QNPGX.js" rel="modulepreload"/><link href="./cbol-hp-static-assets/chunk-SI5XPHUG.js" rel="modulepreload"/><link href="./cbol-hp-static-assets/chunk-UX5GWDF4.js" rel="modulepreload"/><script src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/polyfills-KFGV2ZA5.js.download" type="module"></script><script defer="" src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/scripts-YNBNA6XX.js.download"></script><script src="./Online Banking, Mortgages, Personal Loans, Investing _ Citi.com_files/main-WOXIXLV3.js.download" type="module"></script>
 
